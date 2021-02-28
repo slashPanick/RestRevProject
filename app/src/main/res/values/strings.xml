@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">covidApp</string>
+    <string name="appTitle">TempName</string>
+    <string name="startButtonText">Get Started</string>
+    <string name="readReviewsButton">Read Reviews</string>
+    <string name="submitReviewButton">Submit Review</string>
+    <string name="mainPageTitle">Select Your Store</string>
+    <string name="storeSearch">Enter store name…</string>
+</resources>
