@@ -1,3 +1,5 @@
+// bootup page, just leads into the mainPage activity
+
 package com.example.RestRevProj;
 
 import androidx.appcompat.app.AppCompatActivity;

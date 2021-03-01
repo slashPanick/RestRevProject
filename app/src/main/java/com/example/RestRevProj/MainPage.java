@@ -1,3 +1,5 @@
+// did example of ArrayList working with ListView
+
 package com.example.RestRevProj;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +15,7 @@ import java.util.ArrayList;
 
 public class MainPage extends AppCompatActivity {
     ListView storeList;
-    ArrayList<String> stores = new ArrayList<>();
+    ArrayList<String> stores = new ArrayList<>();           //start with empty arraylist
     ArrayAdapter<String> arrayAdapter;
     EditText searchEditText;
 
@@ -25,7 +27,7 @@ public class MainPage extends AppCompatActivity {
         storeList = findViewById(R.id.storeList);
         searchEditText = findViewById(R.id.searchEditText);
 
-        stores.add("McDonalds");
+        stores.add("McDonalds");                            // add items to that arraylist
         stores.add("Burger King");
         stores.add("Pizza Hut");
         stores.add("Dominoes");
@@ -34,10 +36,13 @@ public class MainPage extends AppCompatActivity {
         stores.add("Burrito Jax");
         stores.add("Boston Pizza");
 
+        // this is required for ListView to function. params are just context, the ListView, the item (text1) in the ListView,
+        // and what is going in it (stores array). then the adapter is set as the one used by storeList ListView
         arrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, stores);
         storeList.setAdapter(arrayAdapter);
 
+        // this is for the search, generally using editText is less superior way, but actual searchView is more complicated imo
         searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
