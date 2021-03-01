@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.testing">
+    package="com.example.RestRevProj">
 
     <application
         android:allowBackup="true"
@@ -12,14 +12,14 @@
         android:theme="@style/Theme.Testing"
         tools:ignore="AllowBackup">
 
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.RestRevProj.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainPage">
+        <activity android:name="com.example.RestRevProj.MainPage">
             <intent-filter>
                 <action android:name="MainPage" />
                 <category android:name="android.intent.category.DEFAULT" />

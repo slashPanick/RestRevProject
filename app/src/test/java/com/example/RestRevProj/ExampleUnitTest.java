@@ -1,4 +1,4 @@
-package com.example.testing;
+package com.example.RestRevProj;
 
 import org.junit.Test;
 

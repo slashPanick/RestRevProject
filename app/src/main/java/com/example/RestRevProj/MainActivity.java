@@ -1,4 +1,4 @@
-package com.example.testing;
+package com.example.RestRevProj;
 
 import androidx.appcompat.app.AppCompatActivity;
 
