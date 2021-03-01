@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/test2"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
     tools:context=".MainPage">
 
 
@@ -67,6 +72,7 @@
         android:ems="10"
         android:hint="@string/storeSearch"
         android:inputType="text"
+        android:imeOptions="actionDone"
         android:paddingStart="10dp"
         android:paddingEnd="0dp"
         android:textColor="@color/white"
@@ -79,13 +85,50 @@
     <ListView
         android:id="@+id/storeList"
         android:layout_width="0dp"
-        android:layout_height="325dp"
+        android:layout_height="330dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="18dp"
         android:layout_marginEnd="16dp"
-        android:background="#CD2E2E"
+        android:background="#6FFFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/searchEditText" />
+
+    <TextView
+        android:id="@+id/selectedStoreName"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
+        android:fontFamily="@font/assistant_bold"
+        android:text=""
+        android:textColor="@color/white"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMinTextSize="20sp"
+        android:autoSizeMaxTextSize="28sp"
+        android:autoSizeStepGranularity="2sp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/storeList" />
+
+    <TextView
+        android:id="@+id/selectedStoreAddress"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="15dp"
+        android:fontFamily="@font/assistant_bold"
+        android:text=""
+        android:textColor="@color/white"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMinTextSize="10sp"
+        android:autoSizeMaxTextSize="18sp"
+        android:autoSizeStepGranularity="2sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/selectedStoreName" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,7 +3,6 @@
 package com.example.RestRevProj;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
 
         startBtn = findViewById(R.id.startBtn);
 
-        //noinspection Convert2Lambda
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
