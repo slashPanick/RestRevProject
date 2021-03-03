@@ -12,17 +12,24 @@
         android:theme="@style/Theme.Testing"
         tools:ignore="AllowBackup">
 
-        <activity android:name="com.example.RestRevProj.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name="com.example.RestRevProj.MainPage">
+        <activity android:name=".MainPage">
             <intent-filter>
                 <action android:name="MainPage" />
                 <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ReadActivity">
+            <intent-filter>
+                <action android:name="ReadActivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
 

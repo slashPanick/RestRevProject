@@ -6,7 +6,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/test2"
+    android:background="@drawable/main_bg"
     android:clickable="true"
     android:focusableInTouchMode="true"
     android:focusable="true"
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/submitBtn"
         android:layout_width="0dp"
         android:layout_height="90dp"
         android:backgroundTint="@color/buttonColor"
@@ -39,14 +39,14 @@
         android:text="@string/submitReviewButton"
         android:textSize="20sp"
         app:cornerRadius="0dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/button7"
-        app:layout_constraintEnd_toStartOf="@+id/button7"
+        app:layout_constraintBaseline_toBaselineOf="@+id/reviewBtn"
+        app:layout_constraintEnd_toStartOf="@+id/reviewBtn"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/reviewBtn"
         android:layout_width="0dp"
         android:layout_height="90dp"
         android:backgroundTint="@color/buttonColor"
@@ -60,7 +60,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button6" />
+        app:layout_constraintStart_toEndOf="@+id/submitBtn" />
 
     <EditText
         android:id="@+id/searchEditText"
@@ -108,14 +108,13 @@
         android:autoSizeMinTextSize="20sp"
         android:autoSizeMaxTextSize="28sp"
         android:autoSizeStepGranularity="2sp"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/storeList" />
 
     <TextView
         android:id="@+id/selectedStoreAddress"
         android:layout_width="match_parent"
-        android:layout_height="53dp"
+        android:layout_height="54dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="12dp"
         android:layout_marginStart="15dp"

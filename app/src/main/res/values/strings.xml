@@ -6,4 +6,15 @@
     <string name="submitReviewButton">Submit Review</string>
     <string name="mainPageTitle">Select Your Store</string>
     <string name="storeSearch">Enter store name…</string>
+    <string name="returnButtonText">return</string>
+    <string name="reviewCountText">Number of reviews: 94</string>
+    <string name="radioQuestionOneText">Here is a 100% real question, correct?</string>
+    <string name="radioQuestionOneCount">82%</string>
+    <string name="radioQuestionTwoText">Another completely real question, right?</string>
+    <string name="radioQuestionTwoCount">20%</string>
+    <string name="progressBarOneText">Cleanliness</string>
+    <string name="progressBarTwoText">Social Distancing</string>
+    <string name="progressBarThreeText">Proper PPE</string>
+    <string name="storeName">TEMP STORE NAME HERE</string>
+    <string name="storeAddress">TEMP ADDRESS HERE</string>
 </resources>
