@@ -1,5 +1,4 @@
 // did example of ArrayList working with ListView
-// todo: new activity for viewing
 // todo: new activity for submitting *deviate from sb on result*
 // todo: new style for buttons: float border 75% transparent
 
@@ -7,16 +6,16 @@ package com.example.RestRevProj;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -37,6 +36,7 @@ public class MainPage extends AppCompatActivity {
     ArrayAdapter<String> arrayAdapter;
     TextView selectedStoreName;
     TextView selectedStoreAddress;
+    Button reviewBtn;
 
 
     @Override
@@ -48,6 +48,7 @@ public class MainPage extends AppCompatActivity {
         searchEditText = findViewById(R.id.searchEditText);
         selectedStoreName = findViewById(R.id.selectedStoreName);
         selectedStoreAddress = findViewById(R.id.selectedStoreAddress);
+        reviewBtn = findViewById(R.id.reviewBtn);
 
         findViewById(R.id.constraintLayout).setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -108,10 +109,21 @@ public class MainPage extends AppCompatActivity {
 
         storeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 selectedStoreAddress.setText(restoList.get(position).get(1));
                 selectedStoreName.setText((String) storeList.getItemAtPosition(position));
             }
         });
-    }
-}
+
+        reviewBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(selectedStoreName.getText().equals("")) {
+                    Toast.makeText(getApplicationContext(), "Must select a store", Toast.LENGTH_LONG).show();
+                } else {
+                    Intent intent = new Intent(v.getContext(), ReadActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+    }}
