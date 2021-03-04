@@ -8,13 +8,16 @@
     <string name="storeSearch">Enter store name…</string>
     <string name="returnButtonText">return</string>
     <string name="reviewCountText">Number of reviews: 94</string>
-    <string name="radioQuestionOneText">Here is a 100% real question, correct?</string>
     <string name="radioQuestionOneCount">82%</string>
-    <string name="radioQuestionTwoText">Another completely real question, right?</string>
     <string name="radioQuestionTwoCount">20%</string>
-    <string name="progressBarOneText">Cleanliness</string>
-    <string name="progressBarTwoText">Social Distancing</string>
-    <string name="progressBarThreeText">Proper PPE</string>
     <string name="storeName">TEMP STORE NAME HERE</string>
     <string name="storeAddress">TEMP ADDRESS HERE</string>
+    <string name="cleanliness">Cleanliness</string>
+    <string name="safetyText">Did you feel safe?</string>
+    <string name="ppeRadioText">Did the staff use PPE?</string>
+    <string name="cleanlinessText">How clean was the location?</string>
+    <string name="sanitizerRadioText">Did the location offer hand sanitizer?</string>
+    <string name="socialDistanceText">Were people socially distanced?</string>
+    <string name="returnBtn">RETURN</string>
+    <string name="submitBtn">SUBMIT REVIEW</string>
 </resources>

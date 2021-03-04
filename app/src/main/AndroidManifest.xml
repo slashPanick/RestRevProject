@@ -12,6 +12,13 @@
         android:theme="@style/Theme.Testing"
         tools:ignore="AllowBackup">
 
+        <activity android:name=".SubmitActivity">
+            <intent-filter>
+                <action android:name="SubmitActivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,8 +35,8 @@
 
         <activity android:name=".ReadActivity">
             <intent-filter>
-                <action android:name="ReadActivity"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="ReadActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 

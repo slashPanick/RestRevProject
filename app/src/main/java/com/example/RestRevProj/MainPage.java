@@ -37,6 +37,7 @@ public class MainPage extends AppCompatActivity {
     TextView selectedStoreName;
     TextView selectedStoreAddress;
     Button reviewBtn;
+    Button submitBtn;
 
 
     @Override
@@ -49,6 +50,7 @@ public class MainPage extends AppCompatActivity {
         selectedStoreName = findViewById(R.id.selectedStoreName);
         selectedStoreAddress = findViewById(R.id.selectedStoreAddress);
         reviewBtn = findViewById(R.id.reviewBtn);
+        submitBtn = findViewById(R.id.submitBtn);
 
         findViewById(R.id.constraintLayout).setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -123,6 +125,19 @@ public class MainPage extends AppCompatActivity {
                 } else {
                     Intent intent = new Intent(v.getContext(), ReadActivity.class);
                     startActivity(intent);
+                }
+            }
+        });
+
+
+        submitBtn .setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(selectedStoreName.getText().equals("")) {
+                    Toast.makeText(getApplicationContext(), "Must select a store", Toast.LENGTH_LONG).show();
+                } else {
+                    Intent intent2 = new Intent(v.getContext(), SubmitActivity.class);
+                    startActivity(intent2);
                 }
             }
         });
