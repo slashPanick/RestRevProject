@@ -9,8 +9,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -25,6 +27,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -39,6 +42,8 @@ public class MainPage extends AppCompatActivity {
     Button reviewBtn;
     Button submitBtn;
 
+    public static int storePosition;
+    public static ArrayList<List<String>> restoList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +57,8 @@ public class MainPage extends AppCompatActivity {
         reviewBtn = findViewById(R.id.reviewBtn);
         submitBtn = findViewById(R.id.submitBtn);
 
+
+
         findViewById(R.id.constraintLayout).setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -64,9 +71,9 @@ public class MainPage extends AppCompatActivity {
 
         String str = null;
         BufferedReader br = null;
-        List<List<String>> restoList = new ArrayList<>();
+        ArrayList<List<String>> restoList = new ArrayList<>();
 
-        //noinspection TryWithIdenticalCatches
+        // Get restaurant info from .csv
         try {
             InputStream is = getResources().openRawResource(R.raw.restaurants);
             br = new BufferedReader(new InputStreamReader(is));
@@ -112,6 +119,7 @@ public class MainPage extends AppCompatActivity {
         storeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                storePosition = position;
                 selectedStoreAddress.setText(restoList.get(position).get(1));
                 selectedStoreName.setText((String) storeList.getItemAtPosition(position));
             }
@@ -123,7 +131,9 @@ public class MainPage extends AppCompatActivity {
                 if(selectedStoreName.getText().equals("")) {
                     Toast.makeText(getApplicationContext(), "Must select a store", Toast.LENGTH_LONG).show();
                 } else {
-                    Intent intent = new Intent(v.getContext(), ReadActivity.class);
+                    Intent intent = new Intent(MainPage.this, ReadActivity.class);
+                    intent.putExtra("SELECTED_STORE_POSITION", storePosition);
+                    intent.putExtra("STORE_LIST", restoList);
                     startActivity(intent);
                 }
             }
@@ -137,6 +147,8 @@ public class MainPage extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Must select a store", Toast.LENGTH_LONG).show();
                 } else {
                     Intent intent2 = new Intent(v.getContext(), SubmitActivity.class);
+                    intent2.putExtra("SELECTED_STORE_POSITION", storePosition);
+                    intent2.putExtra("STORE_LIST", restoList);
                     startActivity(intent2);
                 }
             }

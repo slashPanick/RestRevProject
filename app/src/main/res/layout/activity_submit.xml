@@ -66,7 +66,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reviewCountTextView" />
 
-    <RadioButton
+    <CheckBox
         android:id="@+id/ppeRadioBtn"
         android:layout_width="35dp"
         android:layout_height="32dp"
@@ -89,7 +89,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ppeRadioText" />
 
-    <RadioButton
+    <CheckBox
         android:id="@+id/sanitizerRadioBtn"
         android:layout_width="35dp"
         android:layout_height="32dp"
