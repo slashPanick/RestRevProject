@@ -96,12 +96,15 @@ public class SubmitActivity extends AppCompatActivity {
                     sanitizerValue = 0;
                 }
 
-                restoList.get(restaurantPosition).set(3, String.valueOf(Integer.parseInt(restoList.get(restaurantPosition).get(3) + 1)));
-                restoList.get(restaurantPosition).set(5, String.valueOf(Integer.parseInt(restoList.get(restaurantPosition).get(5) + ppeValue)));
-                restoList.get(restaurantPosition).set(6, String.valueOf(Integer.parseInt(restoList.get(restaurantPosition).get(6) + sanitizerValue)));
-                restoList.get(restaurantPosition).set(7, String.valueOf(Integer.parseInt(restoList.get(restaurantPosition).get(7) + cleanlinessSeekBar.getProgress())));
-                restoList.get(restaurantPosition).set(8, String.valueOf(Integer.parseInt(restoList.get(restaurantPosition).get(8) + socialDistanceSeekBar.getProgress())));
-                restoList.get(restaurantPosition).set(9, String.valueOf(Integer.parseInt(restoList.get(restaurantPosition).get(9) + safetySeekbar.getProgress())));
+                restoList.get(restaurantPosition).set(3, String.valueOf(Integer.parseInt(restoList.get(restaurantPosition).get(3)) + 1));
+                restoList.get(restaurantPosition).set(5, String.valueOf(Integer.parseInt(restoList.get(restaurantPosition).get(5)) + ppeValue));
+                restoList.get(restaurantPosition).set(6, String.valueOf(Integer.parseInt(restoList.get(restaurantPosition).get(6)) + sanitizerValue));
+                restoList.get(restaurantPosition).set(7, String.valueOf(Integer.parseInt(restoList.get(restaurantPosition).get(7)) + cleanlinessSeekBar.getProgress()));
+                restoList.get(restaurantPosition).set(8, String.valueOf(Integer.parseInt(restoList.get(restaurantPosition).get(8)) + socialDistanceSeekBar.getProgress()));
+                restoList.get(restaurantPosition).set(9, String.valueOf(Integer.parseInt(restoList.get(restaurantPosition).get(9)) + safetySeekbar.getProgress()));
+
+                // update number of reviews
+                reviewCount.setText("Number of Reviews: " + restoList.get(restaurantPosition).get(3));
 
             }
         });
