@@ -69,25 +69,9 @@ public class MainPage extends AppCompatActivity {
             }
         });
 
-        String str = null;
-        BufferedReader br = null;
-        ArrayList<List<String>> restoList = new ArrayList<>();
+        Intent intent = getIntent();
+        ArrayList<List<String>>  restoList = (ArrayList<List<String>>) intent.getSerializableExtra("STORE_LIST");
 
-        // Get restaurant info from .csv
-        try {
-            InputStream is = getResources().openRawResource(R.raw.restaurants);
-            br = new BufferedReader(new InputStreamReader(is));
-
-            while ((str = br.readLine()) != null) {
-                String[] newResto = str.split(",");
-                restoList.add(Arrays.asList(newResto));
-            }
-            is.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         for (int i = 0; i < restoList.size(); i++) {
             stores.add(restoList.get(i).get(0).toUpperCase());
