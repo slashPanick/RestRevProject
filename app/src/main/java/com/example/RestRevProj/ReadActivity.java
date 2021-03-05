@@ -61,6 +61,7 @@ public class ReadActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent (v.getContext(), MainPage.class);
+                intent.putExtra("STORE_LIST", restoList);
                 startActivity(intent);
             }
         });
