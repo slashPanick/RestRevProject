@@ -6,20 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
-import android.util.*;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ReadActivity extends AppCompatActivity {
-    Button returnBtn;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +23,9 @@ public class ReadActivity extends AppCompatActivity {
         ProgressBar progressBarCleanliness = findViewById(R.id.progressBar);
         ProgressBar progressBarSD = findViewById(R.id.progressBar2);
         ProgressBar progressBarSafety = findViewById(R.id.progressBar3);
+        Button returnBtn = findViewById(R.id.returnBtn);
+        Button submitBtn = findViewById(R.id.submitBtn);
+
 
         // Get current intent
         Intent intent = getIntent();
@@ -54,13 +48,20 @@ public class ReadActivity extends AppCompatActivity {
         progressBarSafety.setProgress((int) Math.round(Double.parseDouble(restoList.get(restaurantPosition).get(9))/Double.parseDouble(restoList.get(restaurantPosition).get(3))));
 
 
-
-        returnBtn = findViewById(R.id.returnBtn);
-
         returnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent (v.getContext(), MainPage.class);
+                intent.putExtra("STORE_LIST", restoList);
+                startActivity(intent);
+            }
+        });
+
+        submitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (v.getContext(), SubmitActivity.class);
+                intent.putExtra("SELECTED_STORE_POSITION", restaurantPosition);
                 intent.putExtra("STORE_LIST", restoList);
                 startActivity(intent);
             }

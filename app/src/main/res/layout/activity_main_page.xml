@@ -28,24 +28,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/submitBtn"
-        android:layout_width="0dp"
-        android:layout_height="90dp"
-        android:backgroundTint="@color/buttonColor"
-        android:fontFamily="@font/assistant_bold"
-        android:includeFontPadding="false"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:text="@string/submitReviewButton"
-        android:textSize="20sp"
-        app:cornerRadius="0dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/reviewBtn"
-        app:layout_constraintEnd_toStartOf="@+id/reviewBtn"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
         android:id="@+id/reviewBtn"
         android:layout_width="0dp"
         android:layout_height="90dp"
@@ -57,10 +39,26 @@
         android:text="@string/readReviewsButton"
         android:textSize="20sp"
         app:cornerRadius="0dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/submitBtn"
+        app:layout_constraintEnd_toStartOf="@+id/submitBtn"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/submitBtn"
+        android:layout_width="0dp"
+        android:layout_height="90dp"
+        android:backgroundTint="@color/buttonColor"
+        android:fontFamily="@font/assistant_bold"
+        android:includeFontPadding="false"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/submitReviewButton"
+        android:textSize="20sp"
+        app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/submitBtn" />
+        app:layout_constraintStart_toEndOf="@+id/reviewBtn" />
 
     <EditText
         android:id="@+id/searchEditText"
@@ -85,6 +83,8 @@
     <ListView
         android:id="@+id/storeList"
         android:layout_width="0dp"
+        android:choiceMode="singleChoice"
+        android:listSelector="#666666"
         android:layout_height="330dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="18dp"

@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +81,7 @@ public class SubmitActivity extends AppCompatActivity {
         });
 
 
-        // Listener for Submit button (should write reviews to csv?)
+        // Listener for Submit button
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,6 +109,18 @@ public class SubmitActivity extends AppCompatActivity {
                 // update number of reviews
                 reviewCount.setText("Number of Reviews: " + restoList.get(restaurantPosition).get(3));
 
+                // notifies returning to main page
+                Toast.makeText(v.getContext(), "Review submitted! Returning to main page..", Toast.LENGTH_LONG).show();
+
+                // returns to main page after 2 seconds
+                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent (v.getContext(), MainPage.class);
+                        intent.putExtra("STORE_LIST", restoList);
+                        startActivity(intent);
+                    }
+                }, 3000);
             }
         });
     }

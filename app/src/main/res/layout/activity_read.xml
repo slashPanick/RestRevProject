@@ -190,19 +190,38 @@
 
     <Button
         android:id="@+id/returnBtn"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="90dp"
         android:backgroundTint="@color/buttonColor"
         android:fontFamily="@font/assistant_bold"
+        android:includeFontPadding="false"
         android:insetTop="0dp"
         android:insetBottom="0dp"
-        android:text="@string/returnButtonText"
+        android:text="@string/returnBtn"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:cornerRadius="0dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/submitBtn"
+        app:layout_constraintEnd_toStartOf="@+id/submitBtn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent" />
 
-
+    <Button
+        android:id="@+id/submitBtn"
+        android:layout_width="0dp"
+        android:layout_height="90dp"
+        android:backgroundTint="@color/buttonColor"
+        android:fontFamily="@font/assistant_bold"
+        android:includeFontPadding="false"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/submitBtn"
+        android:textSize="20sp"
+        app:cornerRadius="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/returnBtn" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
