@@ -72,7 +72,6 @@
         android:layout_height="32dp"
         android:layout_marginEnd="16dp"
         android:buttonTint="#FFFFFF"
-        android:checked="true"
         app:layout_constraintBaseline_toBaselineOf="@+id/ppeRadioText"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -95,7 +94,6 @@
         android:layout_height="32dp"
         android:layout_marginEnd="16dp"
         android:buttonTint="#FFFFFF"
-        android:checked="true"
         app:layout_constraintBaseline_toBaselineOf="@+id/sanitizerRadioText"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -122,6 +120,7 @@
         android:layout_marginEnd="32dp"
         android:max="10"
         android:progress="5"
+        android:progressBackgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cleanlinessTextView" />
@@ -149,6 +148,7 @@
         android:layout_marginEnd="32dp"
         android:max="10"
         android:progress="5"
+        android:progressBackgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/socialDistanceText" />
@@ -176,6 +176,7 @@
         android:layout_marginEnd="32dp"
         android:max="10"
         android:progress="5"
+        android:progressBackgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/safetyText" />
