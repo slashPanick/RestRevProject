@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -18,50 +17,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SubmitActivity extends AppCompatActivity {
-
-
-    TextView storeName;
-    TextView storeAddress;
-    TextView reviewCount;
-
-    CheckBox ppeRadio;
-    CheckBox sanitizerRadio;
-
-    SeekBar cleanlinessSeekBar;
-    SeekBar socialDistanceSeekBar;
-    SeekBar safetySeekbar;
-
-    Button returnBtn;
-    Button submitBtn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit);
 
-        storeName = findViewById(R.id.storeName);
-        storeAddress = findViewById(R.id.storeAddress);
-        reviewCount = findViewById(R.id.reviewCountTextView);
+        TextView storeName = findViewById(R.id.storeName);
+        TextView storeAddress = findViewById(R.id.storeAddress);
+        TextView reviewCount = findViewById(R.id.reviewCountTextView);
 
-        ppeRadio = findViewById(R.id.ppeRadioBtn);
-        sanitizerRadio = findViewById(R.id.sanitizerRadioBtn);
+        CheckBox ppeRadio = findViewById(R.id.ppeRadioBtn);
+        CheckBox sanitizerRadio = findViewById(R.id.sanitizerRadioBtn);
 
-        cleanlinessSeekBar = findViewById(R.id.cleanlinessSeekBar);
-        socialDistanceSeekBar = findViewById(R.id.socialDistanceSeekBar);
-        safetySeekbar = findViewById(R.id.safetySeekBar);
+        SeekBar cleanlinessSeekBar = findViewById(R.id.cleanlinessSeekBar);
+        SeekBar socialDistanceSeekBar = findViewById(R.id.socialDistanceSeekBar);
+        SeekBar safetySeekbar = findViewById(R.id.safetySeekBar);
 
-        returnBtn = findViewById(R.id.returnBtn);
-        submitBtn = findViewById(R.id.submitBtn);
+        Button returnBtn = findViewById(R.id.returnBtn);
+        Button submitBtn = findViewById(R.id.submitBtn);
 
         // Get current intent
         Intent intent = getIntent();
         ArrayList<List<String>> restoList = (ArrayList<List<String>>) intent.getSerializableExtra("STORE_LIST");
-        int restaurantPosition = intent.getIntExtra("SELECTED_STORE_POSITION", -1);
+        int restoAddress = intent.getIntExtra("TEST_INDEX", -1);
 
         // Set restaurant name and address
-        storeName.setText(restoList.get(restaurantPosition).get(0));
-        storeAddress.setText(restoList.get(restaurantPosition).get(1));
-        reviewCount.setText("Number of Reviews: " + restoList.get(restaurantPosition).get(3));
+        storeName.setText(restoList.get(restoAddress).get(0));
+        storeAddress.setText(restoList.get(restoAddress).get(1));
+        reviewCount.setText("Number of Reviews: " + restoList.get(restoAddress).get(3));
 
         // Set seek bars
         cleanlinessSeekBar.setMax(5);
@@ -99,15 +82,15 @@ public class SubmitActivity extends AppCompatActivity {
                     sanitizerValue = 0;
                 }
 
-                restoList.get(restaurantPosition).set(3, String.valueOf(Integer.parseInt(restoList.get(restaurantPosition).get(3)) + 1));
-                restoList.get(restaurantPosition).set(5, String.valueOf(Integer.parseInt(restoList.get(restaurantPosition).get(5)) + ppeValue));
-                restoList.get(restaurantPosition).set(6, String.valueOf(Integer.parseInt(restoList.get(restaurantPosition).get(6)) + sanitizerValue));
-                restoList.get(restaurantPosition).set(7, String.valueOf(Integer.parseInt(restoList.get(restaurantPosition).get(7)) + cleanlinessSeekBar.getProgress()));
-                restoList.get(restaurantPosition).set(8, String.valueOf(Integer.parseInt(restoList.get(restaurantPosition).get(8)) + socialDistanceSeekBar.getProgress()));
-                restoList.get(restaurantPosition).set(9, String.valueOf(Integer.parseInt(restoList.get(restaurantPosition).get(9)) + safetySeekbar.getProgress()));
+                restoList.get(restoAddress).set(3, String.valueOf(Integer.parseInt(restoList.get(restoAddress).get(3)) + 1));
+                restoList.get(restoAddress).set(5, String.valueOf(Integer.parseInt(restoList.get(restoAddress).get(5)) + ppeValue));
+                restoList.get(restoAddress).set(6, String.valueOf(Integer.parseInt(restoList.get(restoAddress).get(6)) + sanitizerValue));
+                restoList.get(restoAddress).set(7, String.valueOf(Integer.parseInt(restoList.get(restoAddress).get(7)) + cleanlinessSeekBar.getProgress()));
+                restoList.get(restoAddress).set(8, String.valueOf(Integer.parseInt(restoList.get(restoAddress).get(8)) + socialDistanceSeekBar.getProgress()));
+                restoList.get(restoAddress).set(9, String.valueOf(Integer.parseInt(restoList.get(restoAddress).get(9)) + safetySeekbar.getProgress()));
 
                 // update number of reviews
-                reviewCount.setText("Number of Reviews: " + restoList.get(restaurantPosition).get(3));
+                reviewCount.setText("Number of Reviews: " + restoList.get(restoAddress).get(3));
 
                 // notifies returning to main page
                 Toast.makeText(v.getContext(), "Review submitted! Returning to main page..", Toast.LENGTH_LONG).show();

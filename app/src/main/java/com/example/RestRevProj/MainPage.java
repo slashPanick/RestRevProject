@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,32 +31,26 @@ import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainPage extends AppCompatActivity {
-    ListView storeList;
-    EditText searchEditText;
-    ArrayList<String> stores = new ArrayList<>();           //start with empty arraylist
-    ArrayAdapter<String> arrayAdapter;
-    TextView selectedStoreName;
-    TextView selectedStoreAddress;
-    Button reviewBtn;
-    Button submitBtn;
-
     public static int storePosition;
-    public static ArrayList<List<String>> restoList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
 
-        storeList = findViewById(R.id.storeList);
-        searchEditText = findViewById(R.id.searchEditText);
-        selectedStoreName = findViewById(R.id.selectedStoreName);
-        selectedStoreAddress = findViewById(R.id.selectedStoreAddress);
-        reviewBtn = findViewById(R.id.reviewBtn);
-        submitBtn = findViewById(R.id.submitBtn);
+        ListView storeList  = findViewById(R.id.storeList);
+        EditText searchEditText = findViewById(R.id.searchEditText);
+        TextView selectedStoreName = findViewById(R.id.selectedStoreName);
+        TextView selectedStoreAddress = findViewById(R.id.selectedStoreAddress);
+        Button reviewBtn = findViewById(R.id.reviewBtn);
+        Button submitBtn = findViewById(R.id.submitBtn);
+        ArrayList<String> stores = new ArrayList<>();
+        ArrayList<String> addresses = new ArrayList<>();
 
 
 
@@ -70,19 +65,28 @@ public class MainPage extends AppCompatActivity {
         });
 
         Intent intent = getIntent();
-        ArrayList<List<String>>  restoList = (ArrayList<List<String>>) intent.getSerializableExtra("STORE_LIST");
+        ArrayList<List<String>> restoList = (ArrayList<List<String>>) intent.getSerializableExtra("STORE_LIST");
 
 
         for (int i = 0; i < restoList.size(); i++) {
             stores.add(restoList.get(i).get(0).toUpperCase());
+            addresses.add(restoList.get(i).get(1).toUpperCase());
         }
 
-        // arrayAdapter is required for ListView to function. params are just context, the ListView, the item (text1) in the ListView,
-        // and what is going in it (stores array). then the adapter is set as the one used by storeList ListView. changes the list item
-        // into an object
-        arrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, stores);
-        storeList.setAdapter(arrayAdapter);
+        // new adapter for 2 line items
+
+        ArrayList<HashMap<String,String>> arrayList = new ArrayList<>();
+        for (int i=0;i < restoList.size(); i++) {
+            HashMap<String,String> hashMap = new HashMap<>();
+            hashMap.put("name", stores.get(i));
+            hashMap.put("address", addresses.get(i));
+            arrayList.add(hashMap);
+        }
+        String[] from = {"name","address"};
+        int[] to = {R.id.textView1, R.id.textView2};
+        SimpleAdapter newAdapter = new SimpleAdapter(this, arrayList, R.layout.listview_item, from, to);
+        storeList.setAdapter(newAdapter);
+
 
         // this is for the search, generally using editText is less superior way, but actual searchView is more complicated imo
         searchEditText.addTextChangedListener(new TextWatcher() {
@@ -92,7 +96,7 @@ public class MainPage extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                arrayAdapter.getFilter().filter(s);
+                newAdapter.getFilter().filter(s);
             }
 
             @Override
@@ -104,8 +108,11 @@ public class MainPage extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 storePosition = position;
-                selectedStoreAddress.setText(restoList.get(position).get(1));
-                selectedStoreName.setText((String) storeList.getItemAtPosition(position));
+                HashMap<String,String> map = (HashMap<String, String>) storeList.getItemAtPosition(position);
+                String name = map.get("name");
+                String address = map.get("address");
+                selectedStoreAddress.setText(address);
+                selectedStoreName.setText(name);
             }
         });
 
@@ -115,8 +122,12 @@ public class MainPage extends AppCompatActivity {
                 if(selectedStoreName.getText().equals("")) {
                     Toast.makeText(getApplicationContext(), "Must select a store", Toast.LENGTH_LONG).show();
                 } else {
+
+                    String currentAddress = (String) selectedStoreAddress.getText();
+                    int testIndex = addresses.indexOf(currentAddress);
+
                     Intent intent = new Intent(MainPage.this, ReadActivity.class);
-                    intent.putExtra("SELECTED_STORE_POSITION", storePosition);
+                    intent.putExtra("TEST_INDEX", testIndex);
                     intent.putExtra("STORE_LIST", restoList);
                     startActivity(intent);
                 }
@@ -130,10 +141,14 @@ public class MainPage extends AppCompatActivity {
                 if(selectedStoreName.getText().equals("")) {
                     Toast.makeText(getApplicationContext(), "Must select a store", Toast.LENGTH_LONG).show();
                 } else {
-                    Intent intent2 = new Intent(v.getContext(), SubmitActivity.class);
-                    intent2.putExtra("SELECTED_STORE_POSITION", storePosition);
-                    intent2.putExtra("STORE_LIST", restoList);
-                    startActivity(intent2);
+
+                    String currentAddress = (String) selectedStoreAddress.getText();
+                    int testIndex = addresses.indexOf(currentAddress);
+
+                    Intent intent = new Intent(MainPage.this, ReadActivity.class);
+                    intent.putExtra("TEST_INDEX", testIndex);
+                    intent.putExtra("STORE_LIST", restoList);
+                    startActivity(intent);
                 }
             }
         });
