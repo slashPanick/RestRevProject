@@ -2,6 +2,7 @@ package com.example.RestRevProj;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,7 +17,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("unchecked")
 public class SubmitActivity extends AppCompatActivity {
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,12 +42,12 @@ public class SubmitActivity extends AppCompatActivity {
         // Get current intent
         Intent intent = getIntent();
         ArrayList<List<String>> restoList = (ArrayList<List<String>>) intent.getSerializableExtra("STORE_LIST");
-        int restoAddress = intent.getIntExtra("TEST_INDEX", -1);
+        int storeIndex = intent.getIntExtra("STORE_INDEX", -1);
 
         // Set restaurant name and address
-        storeName.setText(restoList.get(restoAddress).get(0));
-        storeAddress.setText(restoList.get(restoAddress).get(1));
-        reviewCount.setText("Number of Reviews: " + restoList.get(restoAddress).get(3));
+        storeName.setText(restoList.get(storeIndex).get(0));
+        storeAddress.setText(restoList.get(storeIndex).get(1));
+        reviewCount.setText("Number of Reviews: " + restoList.get(storeIndex).get(3));
 
         // Set seek bars
         cleanlinessSeekBar.setMax(5);
@@ -82,15 +85,15 @@ public class SubmitActivity extends AppCompatActivity {
                     sanitizerValue = 0;
                 }
 
-                restoList.get(restoAddress).set(3, String.valueOf(Integer.parseInt(restoList.get(restoAddress).get(3)) + 1));
-                restoList.get(restoAddress).set(5, String.valueOf(Integer.parseInt(restoList.get(restoAddress).get(5)) + ppeValue));
-                restoList.get(restoAddress).set(6, String.valueOf(Integer.parseInt(restoList.get(restoAddress).get(6)) + sanitizerValue));
-                restoList.get(restoAddress).set(7, String.valueOf(Integer.parseInt(restoList.get(restoAddress).get(7)) + cleanlinessSeekBar.getProgress()));
-                restoList.get(restoAddress).set(8, String.valueOf(Integer.parseInt(restoList.get(restoAddress).get(8)) + socialDistanceSeekBar.getProgress()));
-                restoList.get(restoAddress).set(9, String.valueOf(Integer.parseInt(restoList.get(restoAddress).get(9)) + safetySeekbar.getProgress()));
+                restoList.get(storeIndex).set(3, String.valueOf(Integer.parseInt(restoList.get(storeIndex).get(3)) + 1));
+                restoList.get(storeIndex).set(5, String.valueOf(Integer.parseInt(restoList.get(storeIndex).get(5)) + ppeValue));
+                restoList.get(storeIndex).set(6, String.valueOf(Integer.parseInt(restoList.get(storeIndex).get(6)) + sanitizerValue));
+                restoList.get(storeIndex).set(7, String.valueOf(Integer.parseInt(restoList.get(storeIndex).get(7)) + cleanlinessSeekBar.getProgress()));
+                restoList.get(storeIndex).set(8, String.valueOf(Integer.parseInt(restoList.get(storeIndex).get(8)) + socialDistanceSeekBar.getProgress()));
+                restoList.get(storeIndex).set(9, String.valueOf(Integer.parseInt(restoList.get(storeIndex).get(9)) + safetySeekbar.getProgress()));
 
                 // update number of reviews
-                reviewCount.setText("Number of Reviews: " + restoList.get(restoAddress).get(3));
+                reviewCount.setText("Number of Reviews: " + restoList.get(storeIndex).get(3));
 
                 // notifies returning to main page
                 Toast.makeText(v.getContext(), "Review submitted! Returning to main page..", Toast.LENGTH_LONG).show();

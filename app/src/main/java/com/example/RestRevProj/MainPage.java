@@ -1,7 +1,3 @@
-// did example of ArrayList working with ListView
-// todo: new activity for submitting *deviate from sb on result*
-// todo: new style for buttons: float border 75% transparent
-
 package com.example.RestRevProj;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,14 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -24,17 +17,11 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+@SuppressWarnings("unchecked")
 public class MainPage extends AppCompatActivity {
     public static int storePosition;
 
@@ -52,8 +39,7 @@ public class MainPage extends AppCompatActivity {
         ArrayList<String> stores = new ArrayList<>();
         ArrayList<String> addresses = new ArrayList<>();
 
-
-
+        // closes keyboard on touching outside keyboard
         findViewById(R.id.constraintLayout).setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -64,17 +50,19 @@ public class MainPage extends AppCompatActivity {
             }
         });
 
+        // brings in restoList from mainactivity
         Intent intent = getIntent();
         ArrayList<List<String>> restoList = (ArrayList<List<String>>) intent.getSerializableExtra("STORE_LIST");
 
 
+        // splits restolist into 2 lists for name & address
         for (int i = 0; i < restoList.size(); i++) {
             stores.add(restoList.get(i).get(0).toUpperCase());
             addresses.add(restoList.get(i).get(1).toUpperCase());
         }
 
-        // new adapter for 2 line items
 
+        // new adapter for 2 line items
         ArrayList<HashMap<String,String>> arrayList = new ArrayList<>();
         for (int i=0;i < restoList.size(); i++) {
             HashMap<String,String> hashMap = new HashMap<>();
@@ -96,14 +84,20 @@ public class MainPage extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                newAdapter.getFilter().filter(s);
+                storeList.setFilterText(s.toString().trim());
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+                newAdapter.getFilter().filter(s.toString().trim());
+                if (s.length() == 0) {
+                    storeList.clearTextFilter();
+                }
             }
         });
 
+
+        // listener for selecting store from list
         storeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
@@ -116,18 +110,19 @@ public class MainPage extends AppCompatActivity {
             }
         });
 
+
+        // listener for moving to readactivity
         reviewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(selectedStoreName.getText().equals("")) {
                     Toast.makeText(getApplicationContext(), "Must select a store", Toast.LENGTH_LONG).show();
                 } else {
-
                     String currentAddress = (String) selectedStoreAddress.getText();
-                    int testIndex = addresses.indexOf(currentAddress);
+                    int storeIndex = addresses.indexOf(currentAddress);
 
                     Intent intent = new Intent(MainPage.this, ReadActivity.class);
-                    intent.putExtra("TEST_INDEX", testIndex);
+                    intent.putExtra("STORE_INDEX", storeIndex);
                     intent.putExtra("STORE_LIST", restoList);
                     startActivity(intent);
                 }
@@ -135,18 +130,18 @@ public class MainPage extends AppCompatActivity {
         });
 
 
+        // listener for moving to submitactivity
         submitBtn .setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(selectedStoreName.getText().equals("")) {
                     Toast.makeText(getApplicationContext(), "Must select a store", Toast.LENGTH_LONG).show();
                 } else {
-
                     String currentAddress = (String) selectedStoreAddress.getText();
-                    int testIndex = addresses.indexOf(currentAddress);
+                    int storeIndex = addresses.indexOf(currentAddress);
 
-                    Intent intent = new Intent(MainPage.this, ReadActivity.class);
-                    intent.putExtra("TEST_INDEX", testIndex);
+                    Intent intent = new Intent(MainPage.this, SubmitActivity.class);
+                    intent.putExtra("STORE_INDEX", storeIndex);
                     intent.putExtra("STORE_LIST", restoList);
                     startActivity(intent);
                 }
